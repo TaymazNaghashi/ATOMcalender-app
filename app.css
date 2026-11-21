@@ -1,0 +1,72 @@
+/* Calendar - iOS Calendar-style layout on top of ios.css */
+:root { --tint: var(--red); }
+
+.title-row { display: flex; align-items: center; justify-content: space-between; }
+.month-step { display: flex; margin-inline-end: -12px; }
+.month-step .nav-btn svg.i { width: 22px; height: 22px; stroke-width: 2.2; }
+
+.weekdays, .month { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.weekdays { padding: 8px 0 4px; }
+.weekdays span { text-align: center; font-size: 13px; font-weight: 600; color: var(--label-2); letter-spacing: 0; }
+.weekdays span.we { color: var(--label-3); }
+.month { row-gap: 2px; touch-action: pan-y; }
+.month button {
+  position: relative; height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  padding-top: 6px; font-size: 20px; font-weight: 400; letter-spacing: -.02em; border-top: .5px solid var(--sep);
+}
+.month button .n { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+                   transition: background .2s var(--ease), color .2s var(--ease); }
+.month button:active .n { background: var(--fill-2); }
+.month button.out { color: var(--label-3); }
+.month button.we:not(.out) { color: var(--label-2); }
+.month button.today .n { color: var(--tint); font-weight: 600; }
+.month button.sel .n { background: var(--label); color: var(--bg); font-weight: 600; }
+.month button.sel.today .n { background: var(--tint); color: #fff; }
+.month button .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--label-3); margin-top: 3px; }
+.month button.sel .dot { background: var(--label-2); }
+
+#day-list .section-head, #agenda-view .section-head { text-transform: none; font-size: 15px; font-weight: 600; color: var(--label); }
+#day-list .section-head .count, #agenda-view .section-head .count { font-weight: 400; color: var(--label-2); font-size: 15px; }
+#agenda-view .section-head.today { color: var(--tint); }
+
+.event { display: grid; grid-template-columns: 76px 4px 1fr; gap: 12px; align-items: stretch; padding: 10px 16px; width: 100%; text-align: left;
+         position: relative; background: var(--card); transition: background .15s var(--ease); }
+.event:active { background: var(--fill-2); }
+.event + .event::before { content: ""; position: absolute; top: 0; right: 0; left: 108px; height: .5px; background: var(--sep); }
+.event .when { white-space: nowrap; font-size: 14px; font-variant-numeric: tabular-nums; line-height: 1.35; }
+.event .when small { display: block; color: var(--label-2); font-size: 14px; }
+.event .when.allday { color: var(--label-2); font-size: 13px; padding-top: 2px; }
+.event .bar { border-radius: 2px; background: var(--tint); }
+.event .what { min-width: 0; padding: 1px 0; }
+.event .t { font-weight: 600; overflow-wrap: anywhere; }
+.event .meta { display: flex; flex-wrap: wrap; gap: 2px 12px; margin-top: 2px; color: var(--label-2); font-size: 15px; }
+.event .meta span { display: inline-flex; align-items: center; gap: 4px; }
+.event .meta svg.i { width: 14px; height: 14px; stroke-width: 2; }
+.event.past .t, .event.past .when { color: var(--label-2); }
+.event.past .bar { opacity: .4; }
+.event.now .when { color: var(--tint); font-weight: 600; }
+
+.repeat-row select { color: var(--label-2); }
+.del-choice { display: flex; flex-direction: column; gap: 0; }
+@media (min-width: 760px) { .month button { height: 64px; } }
+
+/* Starts: date + time pills share the row, wrapping under the label when narrow */
+.row.when-row { flex-wrap: wrap; row-gap: 8px; }
+.row.when-row .inputs { display: flex; gap: 8px; margin-left: auto; }
+.row input[type="date"].inline, .row input[type="time"].inline { font-size: 16px; padding: 6px 10px; }
+.row.when-row .grow { flex: 1 0 auto; }
+
+/* Iranian calendar: right-to-left, Friday is the weekend. Persian letters join, so no tracking. */
+.fa-toggle { min-width: 36px; height: 30px; margin: 7px 2px; padding: 0 8px; border-radius: 15px; background: var(--fill);
+             color: var(--label); font-size: 15px; font-weight: 600; letter-spacing: 0;
+             transition: transform .1s ease-out, background-color .2s var(--ease), color .2s var(--ease); }
+.fa-toggle:active { transform: scale(.92); }
+.fa-toggle.on { background: var(--tint); color: #fff; font-size: 12px; }
+:root[data-cal="fa"] #large, :root[data-cal="fa"] #small-title, :root[data-cal="fa"] #title,
+:root[data-cal="fa"] .weekdays span, :root[data-cal="fa"] .month button,
+:root[data-cal="fa"] .section-head { letter-spacing: 0; }
+.weekdays span.fri { color: var(--tint); }
+.month button.fri:not(.out) { color: var(--tint); }
+.month button.fri.sel .n { color: var(--bg); }
+.month button.fri.sel.today .n { color: #fff; }
+.fa-date { flex-basis: 100%; text-align: end; color: var(--label-2); font-size: 14px; letter-spacing: 0; }

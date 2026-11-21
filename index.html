@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calendar</title>
+<meta name="description" content="Your calendar, synced between your phone and ATOM.">
+<meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Calendar">
+<meta name="referrer" content="no-referrer">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
+<link rel="stylesheet" href="ios.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div id="page">
+  <header class="nav" id="nav">
+    <span class="left"><button class="nav-btn" id="btn-today">Today</button></span>
+    <span class="small-title" id="small-title"></span>
+    <span class="right"><button class="fa-toggle" id="btn-fa" aria-pressed="false" aria-label="Iranian calendar">فا</button>
+      <button class="nav-btn" id="btn-settings" aria-label="Settings"></button>
+      <button class="nav-btn" id="btn-add" aria-label="New event"></button></span>
+  </header>
+  <section class="large" id="large">
+    <div class="title-row">
+      <h1 id="title"></h1>
+      <span class="month-step" id="month-step">
+        <button class="nav-btn" id="prev" aria-label="Previous month"></button>
+        <button class="nav-btn" id="next" aria-label="Next month"></button>
+      </span>
+    </div>
+    <div class="sub"><span id="year"></span> <span class="status" id="status" role="status" aria-live="polite"></span></div>
+  </section>
+  <main class="content">
+    <section id="month-view">
+      <div class="weekdays" id="weekdays"></div>
+      <div class="month" id="month"></div>
+      <div id="day-list"></div>
+    </section>
+    <section id="agenda-view" hidden></section>
+  </main>
+</div>
+
+<nav class="tabbar" id="tabs" aria-label="View">
+  <button data-view="month"><span data-icon="calendar"></span>Calendar</button>
+  <button data-view="agenda"><span data-icon="agenda"></span>Agenda</button>
+</nav>
+
+<div id="scrim"></div>
+<div id="sheet" class="sheet" role="dialog" aria-modal="true" aria-hidden="true"></div>
+
+<script src="docsync.js"></script>
+<script src="ui.js"></script>
+<script src="jalali.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
